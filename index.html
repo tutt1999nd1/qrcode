@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="index.css" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" ></script>
+    <title>Title</title>
+</head>
+<body>
+    <div class="main">
+
+        <div class="wrapper-form">
+            <div class="row row-main">
+                <div class="col s6">
+                    <div><strong>Thông tin thanh toán</strong></div>
+                    <form class="form-bank">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input disabled value="NGÂN HÀNG TMCP NGOẠI THƯƠNG VIỆT NAM" id="name-bank" type="text" class="validate">
+                                <label for="name-bank">Ngân hàng hưởng thụ</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input disabled value="QŨY ĐẦU TƯ TRÁI PHIẾU AN TOÀN AMBER" id="name-account" type="text" class="validate">
+                                <label for="name-account">Tên tài khoản</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input disabled value="109000004" id="stk" type="text" class="validate">
+                                <label for="stk">Số tài khoản</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input  value="" id="name-user" type="text" class="validate" placeholder="Viết hoa không dấu">
+                                <label for="name-user">Tên người dùng</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input  value="" id="code" type="text" class="validate" placeholder="Mã giao dịch">
+                                <label for="name-user">Mã giao dịch</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input   value="" id="amount" type="number" class="validate" placeholder="Số tiền">
+                                <label for="amount">Số tiền cần chuyển</label>
+                            </div>
+                        </div>
+                        <div class="row center">
+                            <a onclick="getQr()" class="waves-effect waves-light btn">Thanh toán </a>
+                        </div>
+                    </form>
+                </div>
+                <div class="wrapper-qr col s6">
+                    <div><strong>Mã QR</strong></div>
+                    <img id="qr"  src="qr.png"></img>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+<script>
+    const getQr = () => {
+
+        let amount = $('#amount').val();
+        let content = $('#name-user').val().toString().toUpperCase()+" "+$('#code').val()+' MUA ASBF';
+         if (!$('#name-user').val()){
+            alert("Vui lòng nhập họ tên")
+            return
+        }
+        else if(!amount){
+            alert("Vui lòng nhập số tiền")
+            return
+        }
+
+        else if(!$('#code').val()){
+            alert("Vui lòng nhập mã giao dịch")
+            return
+        }
+
+        console.log("amount",amount)
+        console.log("content",content)
+        $.ajax({
+            type:'GET',
+            url:`http://localhost:3000/get-qr?amount=${amount}&content=${content}`,
+            success:function (e) {
+                console.log(e)
+                $('#qr').attr('src',e.qrCode);
+            }
+        })
+    }
+</script>
+</html>

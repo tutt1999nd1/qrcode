@@ -1,0 +1,41 @@
+.main{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f2f5;
+    background: url("bg_afm_wood.jpg") no-repeat;
+    background-size: cover;}
+.wrapper-form{
+    background-color: white;
+    padding: 30px;
+    border-radius: 5px;
+    width: 70%;
+    border: thin solid rgba(0,0,0,.12);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;}
+.form-bank{
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: thin solid rgba(0,0,0,.12);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+label{
+    color: black !important;
+}
+input[type=text]:not(.browser-default):disabled{
+    color: unset !important;
+}
+.row-main{
+    justify-content: center;
+    display: flex;
+}
+.wrapper-qr img{
+    width: 300px;
+}
+.wrapper-qr{
+    text-align: center;
+}
+strong{
+    font-size: 25px;
+}
